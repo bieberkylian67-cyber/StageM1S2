@@ -4,8 +4,9 @@ Ce script python permet de récupérer la séquence ADN au format FASTA d'une pr
 ##Prérequis
 Le script utiliser la version Python 3
 
-Besoin de la librairie requests 
+Besoin de la librairie requests, sys
 pip installs requests 
+pip installs sys
 
 ##Utiliser le script
-python script_extraction_ADN.py id_Swissprot
+
