@@ -10,7 +10,6 @@ import sys
 import requests
 import time 
 
-
 #Fonction qui permet d'extraire le fichier uniprotKB mais on utilise API batch pour faire des requêtes groupées
 def extracteur_fichierJSON(liste_ids):
     url = "https://rest.uniprot.org/uniprotkb/accessions"
@@ -39,13 +38,6 @@ def Id_ENSEMBL_Transcript(resultat_fichierJSON, resultat_id):
                 juste_id = cross_ref["id"].split(".") # permet d'enlever les numéro de versions sur les id ENSEMBL
                 liste_ID_Transcript.append(juste_id[0])
     return liste_ID_Transcript
-
-
-    #Fonction qui permet d'écrire le résultat dans un fichier :
-def ecrire_fichier_resultat(id_swissprot, resultat_LISTE, chemin_fichier_sortie):
-    with open (chemin_fichier_sortie, "a") as fichier:
-        for i in resultat_LISTE:
-            fichier.write(f"{id_swissprot}\t{i}\n")
 
 
 if __name__ == "__main__":
