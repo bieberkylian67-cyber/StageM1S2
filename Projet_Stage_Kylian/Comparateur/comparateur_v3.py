@@ -5,17 +5,18 @@ import json
 #Input 
 # Argument 1 : fichier qui contient les prédictions de Augustus
 # Argument 2 : fichier ENSEMBL qui contient les bonnes positions des exons 
+# Argument 3 : fichier sortie du dataset 
 
 #Output un fichier dataset
 
 #Code pour les erreurs : 
-#N1 N-terminal extension
-#N2 N-terminal deletion
-#C1 C-terminal extension
-#C2 C-terminal deletion
-#1  insertion
-#2  deletion
-#3  inconsistent segment
+# N1 = N-terminal extension
+# N2 = N-terminal deletion
+# C1 = C-terminal extension
+# C2 = C-terminal deletion
+# 1 = insertion
+# 2 = deletion
+# 3 = inconsistent segment
 
 
 def convertir_gff3_to_dict(fichier_input_augustus):
@@ -175,41 +176,40 @@ def annotations(dico_conversion, dico_ensembl):
                     coches_ensembl[i] = True
                     trouve = True
 
-
+                    # Cas 1 : on a 2 extensions
                     if start_augustus < s_ens and end_augustus > e_ens:
                         # Augustus trop long des 2 côtés
                         erreurs.append(f"N1({start_augustus}, {s_ens})")
                         erreurs.append(f"C1({e_ens}, {end_augustus})")
 
+                    # Cas 2 : on a 2 délétions 
                     elif start_augustus > s_ens and end_augustus < e_ens:
-                        # Augustus trop court des 2 côtés
                         erreurs.append(f"N2({s_ens}, {start_augustus})")
                         erreurs.append(f"C2({end_augustus}, {e_ens})")
 
+                    # Cas 3 : on a une extension du côté C-terminal
                     elif start_augustus == s_ens and end_augustus > e_ens:
-                        # Start identique, end trop long
                         erreurs.append(f"C1({e_ens}, {end_augustus})")
                         
-
+                    #Cas 4 : on a une extension du côté N-terminal
                     elif start_augustus < s_ens and end_augustus == e_ens:
-                        # Start trop long, end identique
                         erreurs.append(f"N1({start_augustus}, {s_ens})")
                         
+                    # Cas 5 :on a une délétion du côté N-terminal
                     elif start_augustus > s_ens and end_augustus == e_ens:
-                        # Start trop court, end identique
                         erreurs.append(f"N2({s_ens}, {start_augustus})")
 
+                    # Cas 6 : on a une délétion du côté C-terminal
                     elif start_augustus == s_ens and end_augustus < e_ens:
-                        # Start identique, end trop court
                         erreurs.append(f"C2({end_augustus}, {e_ens})")
 
+                    # Cas 7 : on a une extension du côté N-terminal et une délétion du côté C-terminal
                     elif start_augustus < s_ens and end_augustus < e_ens:
-                        # Start trop long, end trop court 
                         erreurs.append(f"N1({start_augustus}, {s_ens})")
                         erreurs.append(f"C2({end_augustus}, {e_ens})")
 
+                    #Cas 8 : on a une délétion du côté N-terminal et une extension du côté C-terminal
                     elif start_augustus > s_ens and end_augustus > e_ens:
-                        # Start trop court, end trop long
                         erreurs.append(f"N2({s_ens}, {start_augustus})")
                         erreurs.append(f"C1({e_ens}, {end_augustus})")
 
@@ -238,10 +238,10 @@ if __name__ == "__main__":
     # 2. On récupère le dictionnaire Ensembl
     dico_ensembl = dictionnaire_ensembl(fichier_input_ensembl)
 
-    # 3. On génère le fichier de statistiques/annotations
+    # 3. On récupère le dictionnaire des erreurs
     dico_erreurs = annotations(dico_conv, dico_ensembl)
 
-    # 4. (Optionnel) Ton filtre de mauvaises prédictions
+    # 4. Récupère les mauvaises prédictions 
     filtre_mauvaise_prediction(dico_conv, dico_ensembl, dico_erreurs, dataset_bad_predictions)
 
     print("Script terminé")
