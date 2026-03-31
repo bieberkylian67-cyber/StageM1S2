@@ -1,0 +1,124 @@
+##gff-version 3
+# This output was generated with AUGUSTUS (version 3.5.0).
+# AUGUSTUS is a gene prediction tool written by M. Stanke (mario.stanke@uni-greifswald.de),
+# O. Keller, S. König, L. Gerischer, L. Romoth, Katharina Hoff, Henry Mehlan and Daniel Honsel.
+# Please cite: Mario Stanke, Mark Diekhans, Robert Baertsch, David Haussler (2008),
+# Using native and syntenically mapped cDNA alignments to improve de novo gene finding
+# Bioinformatics 24: 637-644, doi 10.1093/bioinformatics/btn013
+# No extrinsic information on sequences given.
+# Sources of extrinsic information: M RM 
+# Initializing the parameters using config directory /biolo/augustus/3.5.0/config/ ...
+# human version. Using default transition matrix.
+# Looks like /gstock/user/bieber/temporaire/temp_paquet_9.fa is in fasta format.
+# We have hints for 0 sequences and for 0 of the sequences in the input set.
+#
+# ----- prediction on sequence number 1 (length = 5651, name = ENSBTAT00090068642) -----
+#
+# Predicted genes for sequence number 1 on both strands
+# start gene g1
+ENSBTAT00090068642	AUGUSTUS	gene	162	5518	1	+	.	ID=g1
+ENSBTAT00090068642	AUGUSTUS	transcript	162	5518	.	+	.	ID=g1.t1;Parent=g1
+ENSBTAT00090068642	AUGUSTUS	start_codon	162	164	.	+	0	Parent=g1.t1
+ENSBTAT00090068642	AUGUSTUS	CDS	162	257	.	+	0	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00090068642	AUGUSTUS	CDS	2276	2402	.	+	0	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00090068642	AUGUSTUS	CDS	3050	3174	.	+	2	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00090068642	AUGUSTUS	CDS	3798	3920	.	+	0	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00090068642	AUGUSTUS	CDS	4335	4454	.	+	0	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00090068642	AUGUSTUS	CDS	5070	5132	.	+	0	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00090068642	AUGUSTUS	CDS	5426	5518	.	+	0	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00090068642	AUGUSTUS	stop_codon	5516	5518	.	+	0	Parent=g1.t1
+# protein sequence = [MSYDRAITVFSPDGHLFQVEYAQEAVKKGSTAVGVRGKDIVVLGVEKKSVAKLQDERTVRKICALDDNVCMAFAGLTA
+# DARIVINRARVECQSHRLTVEDPVTVEYITRYIASLKQRYTQSNGRRPFGISALIVGFDFDGTPRLYQTDPSGTYHAWKANAIGRGAKSVREFLEKNY
+# TDEAIETDDLTIKLVIKALLEVVQSGGKNIELAVMRRDQPLKILNPEEIEKYVAEIEKEKEENEKKKQKKAS]
+# Evidence for and against this transcript:
+# % of transcript supported by hints (any source): 0
+# CDS exons: 0/7
+# CDS introns: 0/6
+# 5'UTR exons and introns: 0/0
+# 3'UTR exons and introns: 0/0
+# hint groups fully obeyed: 0
+# incompatible hint groups: 0
+# end gene g1
+###
+# command line:
+# augustus --species=human --gff3=on /gstock/user/bieber/temporaire/temp_paquet_9.fa
+##gff-version 3
+# This output was generated with AUGUSTUS (version 3.5.0).
+# AUGUSTUS is a gene prediction tool written by M. Stanke (mario.stanke@uni-greifswald.de),
+# O. Keller, S. König, L. Gerischer, L. Romoth, Katharina Hoff, Henry Mehlan and Daniel Honsel.
+# Please cite: Mario Stanke, Mark Diekhans, Robert Baertsch, David Haussler (2008),
+# Using native and syntenically mapped cDNA alignments to improve de novo gene finding
+# Bioinformatics 24: 637-644, doi 10.1093/bioinformatics/btn013
+# No extrinsic information on sequences given.
+# Sources of extrinsic information: M RM 
+# Initializing the parameters using config directory /biolo/augustus/3.5.0/config/ ...
+# human version. Using default transition matrix.
+# Looks like /gstock/user/bieber/temporaire/temp_paquet_9.fa is in fasta format.
+# We have hints for 0 sequences and for 0 of the sequences in the input set.
+#
+# ----- prediction on sequence number 1 (length = 10043, name = ENSBTAT00000152876) -----
+#
+# Predicted genes for sequence number 1 on both strands
+# start gene g1
+ENSBTAT00000152876	AUGUSTUS	gene	168	9025	1	+	.	ID=g1
+ENSBTAT00000152876	AUGUSTUS	transcript	168	9025	.	+	.	ID=g1.t1;Parent=g1
+ENSBTAT00000152876	AUGUSTUS	start_codon	168	170	.	+	0	Parent=g1.t1
+ENSBTAT00000152876	AUGUSTUS	CDS	168	280	.	+	0	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00000152876	AUGUSTUS	CDS	7188	7297	.	+	1	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00000152876	AUGUSTUS	CDS	8613	9025	.	+	2	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00000152876	AUGUSTUS	stop_codon	9023	9025	.	+	0	Parent=g1.t1
+# protein sequence = [MAQARISAKANEGRFCRSSSMADRSSRLLESLDQLELRVEALREAATAVEQEKEVLLEMIHSIQNSQDMRQISDGERE
+# ELNLTANRLMGRTLTVEVSVETIRSPQQQESLKHATRIIDEVVSKFLDDLGNARSHLMSLYSACSSEVPAGPVDQKFQSIVIGCALEDQKKIKRRLET
+# LLRNIENADKAIKLLEHSKGAASKTLQQNAEARFN]
+# Evidence for and against this transcript:
+# % of transcript supported by hints (any source): 0
+# CDS exons: 0/3
+# CDS introns: 0/2
+# 5'UTR exons and introns: 0/0
+# 3'UTR exons and introns: 0/0
+# hint groups fully obeyed: 0
+# incompatible hint groups: 0
+# end gene g1
+###
+# command line:
+# augustus --species=human --gff3=on /gstock/user/bieber/temporaire/temp_paquet_9.fa
+##gff-version 3
+# This output was generated with AUGUSTUS (version 3.5.0).
+# AUGUSTUS is a gene prediction tool written by M. Stanke (mario.stanke@uni-greifswald.de),
+# O. Keller, S. König, L. Gerischer, L. Romoth, Katharina Hoff, Henry Mehlan and Daniel Honsel.
+# Please cite: Mario Stanke, Mark Diekhans, Robert Baertsch, David Haussler (2008),
+# Using native and syntenically mapped cDNA alignments to improve de novo gene finding
+# Bioinformatics 24: 637-644, doi 10.1093/bioinformatics/btn013
+# No extrinsic information on sequences given.
+# Sources of extrinsic information: M RM 
+# Initializing the parameters using config directory /biolo/augustus/3.5.0/config/ ...
+# human version. Using default transition matrix.
+# Looks like /gstock/user/bieber/temporaire/temp_paquet_9.fa is in fasta format.
+# We have hints for 0 sequences and for 0 of the sequences in the input set.
+#
+# ----- prediction on sequence number 1 (length = 10044, name = ENSBTAT00085041058) -----
+#
+# Predicted genes for sequence number 1 on both strands
+# start gene g1
+ENSBTAT00085041058	AUGUSTUS	gene	168	9026	1	+	.	ID=g1
+ENSBTAT00085041058	AUGUSTUS	transcript	168	9026	.	+	.	ID=g1.t1;Parent=g1
+ENSBTAT00085041058	AUGUSTUS	start_codon	168	170	.	+	0	Parent=g1.t1
+ENSBTAT00085041058	AUGUSTUS	CDS	168	280	.	+	0	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00085041058	AUGUSTUS	CDS	7189	7298	.	+	1	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00085041058	AUGUSTUS	CDS	8614	9026	.	+	2	ID=g1.t1.cds;Parent=g1.t1
+ENSBTAT00085041058	AUGUSTUS	stop_codon	9024	9026	.	+	0	Parent=g1.t1
+# protein sequence = [MAQARISAKANEGRFCRSSSMADRSSRLLESLDQLELRVEALREAATAVEQEKEVLLEMIHSIQNSQDMRQISDGERE
+# ELNLTANRLMGRTLTVEVSVETIRSPQQQESLKHATRIIDEVVSKFLDDLGNARSHLMSLYSACSSEVPAGPVDQKFQSIVIGCALEDQKKIKRRLET
+# LLRNIENADKAIKLLEHSKGAASKTLQQNAEARFN]
+# Evidence for and against this transcript:
+# % of transcript supported by hints (any source): 0
+# CDS exons: 0/3
+# CDS introns: 0/2
+# 5'UTR exons and introns: 0/0
+# 3'UTR exons and introns: 0/0
+# hint groups fully obeyed: 0
+# incompatible hint groups: 0
+# end gene g1
+###
+# command line:
+# augustus --species=human --gff3=on /gstock/user/bieber/temporaire/temp_paquet_9.fa
