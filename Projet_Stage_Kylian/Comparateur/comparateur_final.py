@@ -15,8 +15,9 @@ import json
 # C2 = C-terminal deletion
 # 1 = insertion
 # 2 = deletion
-# 3 = inconsistent segment
+# 3 = inconsistent segmentd
 
+#Fonction qui permet de de convertir le fichier .gff3 en un dictionnaire python
 def convertir_gff3_to_dict(fichier_input_augustus):
     with open (fichier_input_augustus, "r") as fichier:
         dictionnaire_augustus = {}
@@ -61,6 +62,7 @@ def convertir_gff3_to_dict(fichier_input_augustus):
 
     return dictionnaire_augustus
 
+#Fonction qui permet d'extraire le fichier exon_map_ensembl
 def dictionnaire_ensembl(fichier_input_ensembl):
     dictionnaire = {}
     with open (fichier_input_ensembl, "r") as fichier:
@@ -69,6 +71,7 @@ def dictionnaire_ensembl(fichier_input_ensembl):
             dictionnaire.update(convertir)
     return dictionnaire
 
+#Fonction qui permet de convertir les positions de augustus dans la même échelle que ensembl pour pouvoir comparer
 def convertir_positions(fichier_input_augustus, fichier_input_ensembl):
     dico_conversion = {}
     dictionnaire_augustus = convertir_gff3_to_dict(fichier_input_augustus)
@@ -86,50 +89,7 @@ def convertir_positions(fichier_input_augustus, fichier_input_ensembl):
             dico_conversion[transcript_id][gene_number] = {"exons": exon_convertirt, "sequence":infos_gene["sequence"],"strand": strand_aug}
     return dico_conversion
 
-def filtre_mauvaise_prediction(dico_conversion, dico_ensembl, dico_erreurs, dataset_bad_predictions):
-
-    with open(dataset_bad_predictions, "w") as fichier:
-        for id_transcript, total_genes in dico_conversion.items():
-            nombre_gene_total = len(total_genes)
-            compteur = 1 
-            exon_map_ensembl = dico_ensembl.get(id_transcript, {}).get("Exon", [])
-            nombre_exons_ensembl = len(exon_map_ensembl)
-            erreurs_header = " ".join(dico_erreurs.get(id_transcript, []))
-
-            for genes, exons in total_genes.items():
-                if nombre_gene_total > 1:
-                    fin_header = f"_g{compteur}"
-                else:
-                    fin_header = ""
-
-                header_final = f">{id_transcript}{fin_header} {erreurs_header}\n"
-                liste_exon_augustus = exons["exons"]
-                nombre_exons_augustus = len(liste_exon_augustus)
-                compteur += 1 
-
-                if nombre_exons_augustus != nombre_exons_ensembl:
-                    fichier.write(header_final)
-                    fichier.write(f"{exons['sequence']}\n")
-
-                else:
-                    trie_exons_augustus = sorted(liste_exon_augustus)
-                    conversion_tuple_ensembl = []
-
-                    for exon in exon_map_ensembl:
-                        debut = exon["start"]
-                        fin = exon["end"]
-                        stock_temporaire = (debut,fin)
-                        conversion_tuple_ensembl.append(stock_temporaire)
-                    trie_exons_ensembl = sorted(conversion_tuple_ensembl)
-
-                    if trie_exons_augustus == trie_exons_ensembl:
-                        continue
-
-                    elif trie_exons_augustus != trie_exons_ensembl:
-                        fichier.write(header_final)
-                        fichier.write(f"{exons['sequence']}\n")
-    return dataset_bad_predictions
-
+# Fonction qui compare les positions des exons entre les prédictions de augustus et le fichier exon_map_ensembl
 def annotations(dico_conversion, dico_ensembl):
     dico_erreurs = {}
     for id_transcript, gene_augustus in dico_conversion.items():
@@ -224,6 +184,24 @@ def annotations(dico_conversion, dico_ensembl):
             
         dico_erreurs[id_transcript] = erreurs
     return dico_erreurs 
+
+def filtre_mauvaise_prediction(dico_conversion, dico_ensembl, dico_erreurs, dataset_bad_predictions):
+    with open(dataset_bad_predictions, "w") as fichier:
+        for id_transcript, total_genes in dico_conversion.items():
+            nombre_gene_total = len(total_genes)
+            erreurs_header = " ".join(dico_erreurs.get(id_transcript, []))
+            erreurs = dico_erreurs.get(id_transcript, [])
+
+            if nombre_gene_total == 1:
+                # 1 gène avec des erreurs de positions
+                fichier.write(f">{id_transcript} {erreurs_header}\n")
+                fichier.write(f"{total_genes['g1']['sequence']}\n")
+
+            elif nombre_gene_total > 1:
+                continue
+
+    return dataset_bad_predictions
+
 
 if __name__ == "__main__":
     fichier_input_augustus = sys.argv[1]

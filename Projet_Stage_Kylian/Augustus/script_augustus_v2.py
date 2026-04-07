@@ -15,29 +15,38 @@ dictionnaire = {
     "ENST00": "human",    # Homo sapiens
     "ENSMUS": "human",    # Mus musculus --> pas de modèle souris dans Augustus
     "ENSRNO": "human",    # Rattus norvegicus --> pas de modèle rat dans Augustus
-    "ENSBTA": "human",    # Bos taurus
-    "ENSSSC": "human",    # Sus scrofa
-    "ENSCAF": "human",    # Canis lupus familiaris
-    "ENSECA": "human",    # Equus caballus
-    "ENSEAS": "human",    # Equus asinus
-    "ENSFCA": "human",    # Felis catus
-    "ENSOAR": "human",    # Ovis aries
-    "ENSBGR": "human",    # Bos mutus
+    "ENSBTA": "human",    # Bos taurus = Vache 
+    "ENSSSC": "human",    # Sus scrofa = Cochon
+    "ENSCAF": "human",    # Canis lupus familiaris = Chien
+    "ENSECA": "human",    # Equus caballus = Cheval 
+    "ENSEAS": "human",    # Equus asinus = âne
+    "ENSFCA": "human",    # Felis catus = chat
+    "ENSOAR": "human",    # Ovis aries = mouton
+    "ENSBGR": "human",    # Bos mutus = yak
     "ENSBIX": "human",    # Bison bison
     "ENSCDR": "human",    # Camelus dromedarius
-    "ENSVPA": "human",    # Vicugna pacos
-    "ENSLAF": "human",    # Loxodonta africana
-    "ENSDNO": "human",    # Dasypus novemcinctus
-    "ENSMOD": "human",    # Monodelphis domestica
-    "ENSMEU": "human",    # Notamacropus eugenii
-    "ENSOAN": "human",    # Ornithorhynchus anatinus
-    "ENSUMA": "human",    # Ursus maritimus
-    "ENSDLE": "human",    # Delphinapterus leucas
-    "ENSTTR": "human",    # Tursiops truncatus
-    "ENSNVI": "human",    # Neovison vison
-    "ENSPTI": "human",    # Panthera tigris
-    "ENSVVU": "human",    # Vulpes vulpes
-    "ENSRFE": "human",    # Rhinolophus ferrumequinum
+    "ENSVPA": "human",    # Vicugna pacos = alpaga 
+    "ENSLAF": "human",    # Loxodonta africana = éléphant
+    "ENSDNO": "human",    # Dasypus novemcinctus = tatou
+    "ENSMOD": "human",    # Monodelphis domestica = opossum
+    "ENSMEU": "human",    # Notamacropus eugenii = wallaby 
+    "ENSOAN": "human",    # Ornithorhynchus anatinus = ornithorynque 
+    "ENSUMA": "human",    # Ursus maritimus = ours polaire
+    "ENSDLE": "human",    # Delphinapterus leucas = beluga
+    "ENSTTR": "human",    # Tursiops truncatus = dauphin
+    "ENSNVI": "human",    # Neovison vison = vison
+    "ENSPTI": "human",    # Panthera tigris = tigre 
+    "ENSVVU": "human",    # Vulpes vulpes = renard 
+    "ENSRFE": "human",    # Rhinolophus ferrumequinum = chauve souris 
+    "ENSFCT": "human",    # Chat 
+    "ENSPCT": "human",    # Félin / Léopard
+    "ENSMPU": "human",    # Furet 
+    "ENSFDA": "human",    # Furet 
+    "ENSDNV": "human",    # Tatou
+    "ENSRRO": "human",    # Chauve-souris
+    "ENSPSI": "human",    # Chauve-souris
+    "ENSSHA": "human",    # Diable de Tasmanie
+
     # Primates
     "ENSPPY": "human",    # Pongo abelii
     "ENSPTR": "human",    # Pan troglodytes

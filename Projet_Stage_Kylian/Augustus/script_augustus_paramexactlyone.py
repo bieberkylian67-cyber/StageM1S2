@@ -1,40 +1,52 @@
 #Ce script permet de lancer augustus sur chaque séquence d'un fichier fasta 
 import sys
 import os 
-# 1. On récupère le paquet envoyé par Slurm (ex: paquet_1.fa)
+from Bio import SeqIO # on importe dans le module biopython SeqIo pour pouvoir extraire plus facilement les séquences et ids
+# Input
+#Argument 1 = nom du fichier entrée qui contient les séquences au format fasta
+#Argument 2 = nom du fichier de sortie qui contient les prédictions de augustus au format .gff3
 nom_paquet = sys.argv[1]
 nom_resultat = sys.argv[2]
 # On crée un nom de fichier temporaire unique pour ce paquet
-nom_temp = "/home/bieber/stage/Projet_Stage_Kylian/Augustus/temporaire/temp_" + os.path.basename(nom_paquet)
+nom_temp = "/gstock/user/bieber/temporaire/temp_" + os.path.basename(nom_paquet) #fichier temporaire pour stocker
 
 dictionnaire = {
-    # === human ===
+    # 
     "ENST00": "human",    # Homo sapiens
-    "ENSMUS": "human",    # Mus musculus → pas de mouse dans Augustus
-    "ENSRNO": "human",    # Rattus norvegicus → pas de rat dans Augustus
-    "ENSBTA": "human",    # Bos taurus
-    "ENSSSC": "human",    # Sus scrofa
-    "ENSCAF": "human",    # Canis lupus familiaris
-    "ENSECA": "human",    # Equus caballus
-    "ENSEAS": "human",    # Equus asinus
-    "ENSFCA": "human",    # Felis catus
-    "ENSOAR": "human",    # Ovis aries
-    "ENSBGR": "human",    # Bos mutus
+    "ENSMUS": "human",    # Mus musculus --> pas de modèle souris dans Augustus
+    "ENSRNO": "human",    # Rattus norvegicus --> pas de modèle rat dans Augustus
+    "ENSBTA": "human",    # Bos taurus = Vache 
+    "ENSSSC": "human",    # Sus scrofa = Cochon
+    "ENSCAF": "human",    # Canis lupus familiaris = Chien
+    "ENSECA": "human",    # Equus caballus = Cheval 
+    "ENSEAS": "human",    # Equus asinus = âne
+    "ENSFCA": "human",    # Felis catus = chat
+    "ENSOAR": "human",    # Ovis aries = mouton
+    "ENSBGR": "human",    # Bos mutus = yak
     "ENSBIX": "human",    # Bison bison
     "ENSCDR": "human",    # Camelus dromedarius
-    "ENSVPA": "human",    # Vicugna pacos
-    "ENSLAF": "human",    # Loxodonta africana
-    "ENSDNO": "human",    # Dasypus novemcinctus
-    "ENSMOD": "human",    # Monodelphis domestica
-    "ENSMEU": "human",    # Notamacropus eugenii
-    "ENSOAN": "human",    # Ornithorhynchus anatinus
-    "ENSUMA": "human",    # Ursus maritimus
-    "ENSDLE": "human",    # Delphinapterus leucas
-    "ENSTTR": "human",    # Tursiops truncatus
-    "ENSNVI": "human",    # Neovison vison
-    "ENSPTI": "human",    # Panthera tigris
-    "ENSVVU": "human",    # Vulpes vulpes
-    "ENSRFE": "human",    # Rhinolophus ferrumequinum
+    "ENSVPA": "human",    # Vicugna pacos = alpaga 
+    "ENSLAF": "human",    # Loxodonta africana = éléphant
+    "ENSDNO": "human",    # Dasypus novemcinctus = tatou
+    "ENSMOD": "human",    # Monodelphis domestica = opossum
+    "ENSMEU": "human",    # Notamacropus eugenii = wallaby 
+    "ENSOAN": "human",    # Ornithorhynchus anatinus = ornithorynque 
+    "ENSUMA": "human",    # Ursus maritimus = ours polaire
+    "ENSDLE": "human",    # Delphinapterus leucas = beluga
+    "ENSTTR": "human",    # Tursiops truncatus = dauphin
+    "ENSNVI": "human",    # Neovison vison = vison
+    "ENSPTI": "human",    # Panthera tigris = tigre 
+    "ENSVVU": "human",    # Vulpes vulpes = renard 
+    "ENSRFE": "human",    # Rhinolophus ferrumequinum = chauve souris 
+    "ENSFCT": "human",    # Chat 
+    "ENSPCT": "human",    # Félin / Léopard
+    "ENSMPU": "human",    # Furet 
+    "ENSFDA": "human",    # Furet 
+    "ENSDNV": "human",    # Tatou
+    "ENSRRO": "human",    # Chauve-souris
+    "ENSPSI": "human",    # Chauve-souris
+    "ENSSHA": "human",    # Diable de Tasmanie
+
     # Primates
     "ENSPPY": "human",    # Pongo abelii
     "ENSPTR": "human",    # Pan troglodytes
@@ -54,7 +66,7 @@ dictionnaire = {
     "ENSMIC": "human",    # Microcebus murinus
     "ENSOGA": "human",    # Otolemur garnettii
     "ENSTSY": "human",    # Carlito syrichta
-    # Rongeurs → human (souris absent)
+    # Rongeurs 
     "ENSCGR": "human",    # Cricetulus griseus
     "ENSOCU": "human",    # Oryctolagus cuniculus
     "ENSCPO": "human",    # Cavia porcellus
@@ -69,13 +81,13 @@ dictionnaire = {
     "ENSMOC": "human",    # Microtus ochrogaster
     "ENSNGA": "human",    # Nannospalax galili
     "ENSMLU": "human",    # Myotis lucifugus
-    # Reptiles/Amphibiens → human
+    # Reptiles/Amphibiens
     "ENSXET": "human",    # Xenopus tropicalis
     "ENSACA": "human",    # Anolis carolinensis
     "ENSPCA": "human",    # Pelodiscus sinensis
     "ENSCPR": "human",    # Crocodylus porosus
 
-    #    chicken 
+    #    oiseau
     "ENSGAL": "chicken",  # Gallus gallus
     "ENSTGU": "chicken",  # Taeniopygia guttata
     "ENSMGA": "chicken",  # Meleagris gallopavo
@@ -83,7 +95,7 @@ dictionnaire = {
     "ENSANA": "chicken",  # Anas sp.
     "ENSAME": "chicken",  # Dromaius novaehollandiae
 
-    #    zebrafish 
+    #    poisson 
     "ENSDAR": "zebrafish",  # Danio rerio
     "ENSSSA": "zebrafish",  # Salmo salar
     "ENSTRU": "zebrafish",  # Takifugu rubripes
@@ -101,52 +113,23 @@ dictionnaire = {
     "ENSELU": "zebrafish",  # Electrophorus electricus
 
     #    Espèces spécifiques Augustus 
-    "ENSLAC": "elephant_shark",   # Latimeria chalumnae → requin le + proche
+    "ENSLAC": "elephant_shark",   # Latimeria chalumnae c'est le requin le plus proche
     "ENSCMI": "elephant_shark",   # Callorhinchus milii
     "ENSCIN": "ciona",            # Ciona intestinalis
     "ENSXMA": "Xiphophorus_maculatus",  # Xiphophorus maculatus
     "ENSPMA": "sealamprey",       # Petromyzon marinus
 }
 
-# 3. On lit le paquet
-with open(nom_paquet, "r") as f:
-    header = ""
-    sequence = ""
-
-    for ligne in f:
-        ligne = ligne.strip()
-        if not ligne: 
-            continue
-
-        if ligne.startswith(">"):
-            # Si on a une séquence prête, on la traite
-            if header != "":
-                # Trouver l'espèce (on prend les 6 caractères après le >)
-                prefixe = header[1:7]
-                espece = dictionnaire.get(prefixe, "human")
-
-                # Créer le fichier temporaire
-                with open(nom_temp, "w") as f_tmp:
-                    f_tmp.write(header + "\n" + sequence + "\n")
-
-                # Lancer Augustus
-                commande = f"augustus --species={espece} {nom_temp} >> {nom_resultat}"
-                os.system(commande)
-
-            # Reset pour la séquence suivante
-            header = ligne
-            sequence = ""
-        else:
-            sequence = sequence + ligne
-
-    # Traiter la toute dernière séquence du fichier
-    if header != "":
-        prefixe = header[1:7]
-        espece = dictionnaire.get(prefixe, "human")
-        with open(nom_temp, "w") as f_tmp:
-            f_tmp.write(header + "\n" + sequence + "\n")
-        os.system("augustus --species=" + espece + " " + nom_temp + " >> " + nom_resultat)
-
-# 4. On nettoie le fichier temporaire à la fin
+# Permet de lire le fichier d'entrée et de récupérer les séquences et les ids 
+for sequences in SeqIO.parse(nom_paquet, "fasta"):
+    id = sequences.id # .id permet de récupérer l'ID facilement 
+    prefixe = id[0:6]
+    species = dictionnaire.get(prefixe, "human") # prend le species qui correspond dans le dictionnaire , .get pour éviter une erreur de clé et que le script s'arrête et prend human par défaut 
+    with open (nom_temp, "w") as temp:
+        SeqIO.write(sequences, temp, "fasta") # 3 arguments : sequences = la séquence à écrire, temp = le fichier dans lequel écrire, "fasta" = le format 
+    commande = f"augustus --species={species} --genemodel=exactlyone --gff3=on {nom_temp} >> {nom_resultat}"
+    os.system(commande)
+        
+#Efface le fichier temporaire 
 if os.path.exists(nom_temp):
     os.remove(nom_temp)
