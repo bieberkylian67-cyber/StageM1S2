@@ -47,7 +47,7 @@ def makeAsyncEnsemblSeqRequest(ID_file, type_request):
 
     rs = [grequests.post(url, headers=headers, data=json.dumps(i))
           for i in params]
-    all_response = grequests.map(rs, size=8)
+    all_response = grequests.map(rs, size=10)
 
     while error == True:
         error = False
@@ -115,7 +115,7 @@ def makeAsyncEnsemblExonmapRequest(ID_file):
 
     rs = [grequests.post(url, headers=headers, data=json.dumps(i))
           for i in params]
-    all_response = grequests.map(rs, size=3)
+    all_response = grequests.map(rs, size=10)
 
     while error == True:
         error = False
