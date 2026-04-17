@@ -1,0 +1,13 @@
+Starting training script
+Read 41308 correct and 76528 error sequences
+Split sizes: train=94268, val=11784, test=11784
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [00:00<00:00,  3.14it/s]Fetching 4 files: 100%|██████████| 4/4 [00:39<00:00, 10.71s/it]Fetching 4 files: 100%|██████████| 4/4 [00:39<00:00,  9.93s/it]
+Using model esmc_300m on device cuda
+Epoch 1/5: Train Loss=0.0039, Train Acc=0.9994, Val Loss=0.0000, Val Acc=1.0000
+Epoch 2/5: Train Loss=0.0000, Train Acc=1.0000, Val Loss=0.0000, Val Acc=1.0000
+Epoch 3/5: Train Loss=0.0000, Train Acc=1.0000, Val Loss=0.0000, Val Acc=1.0000
+Epoch 4/5: Train Loss=0.0000, Train Acc=1.0000, Val Loss=0.0000, Val Acc=1.0000
+Epoch 5/5: Train Loss=0.0000, Train Acc=1.0000, Val Loss=0.0000, Val Acc=1.0000
+Test Loss=0.0000, Test Acc=1.0000
+Finished training
+Split sizes: train=94268, val=11784, test=11784
