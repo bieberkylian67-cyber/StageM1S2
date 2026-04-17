@@ -1,12 +1,20 @@
-#Projet prédiction de gènes
-Ce script python permet de récupérer la séquence ADN au format FASTA d'une protéine.
+#Projet ESM-C
+Ce projet contient les scripts python permettant d'obtenir le dataset contenant les erreurs et aussi les 
+scripts pour faire l'entrainement sur ESM classifier 
 
 ##Prérequis
-Le script utiliser la version Python 3
+Le script dans le répertoire SCRIPT_ENSEMBL_TO_SEQ utilise la version de python 3.9 il faut installer cet environnement --> environnement_stage.yml
 
-Besoin de la librairie requests, sys
-pip installs requests 
-pip installs sys
+Tous les autres scripts utilisent la version 3.12 de python --> environnement de base 
 
-##Utiliser le script
+Le Gene predictor utilisé est Augustus 
 
+Il faut adapter les chemins des fichiers input et ouput pour pouvoir utiliser les scripts.
+
+##Dataset 
+Dataset incorrect = " dataset_partial_complet.fa "
+Chemin : /gstock/user/bieber/dataset/dataset_partial/dataset_partial_complet.fa
+
+Dataset correct version 1 = " dataset_proteine.fa "  --> version avec les isoformes
+Dataset correct version 2 = "dataset_proteine_pasdoublons.fa " --> version sans les isoformes
+Chemin : /gstock/user/bieber
